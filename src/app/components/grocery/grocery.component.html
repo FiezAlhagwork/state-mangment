@@ -1,0 +1,21 @@
+
+<div class="container">
+    <h1>Pick Groceries</h1>
+    <select (change)="onTypeChange($event)" class="type-select">
+        <option value="">Select Type</option>
+        <option value="fruit">fruits</option>
+        <option value="snacks">Snacks</option>
+        <option value="drink">Drinks</option>
+    </select>
+<ul class="grocery-list">
+    @for (item of (filteredGroceries$ | async) ?? (grocer$ | async) ; track item.id) {
+        <li class="grocery-item">
+            <span class="increment-button" (click)="increment(item)" >+</span>
+            {{item.name}}
+            <span class="decrement-button" (click)="descrement(item)" >-</span>
+        </li>
+    }@empty {
+        <li class="loading">data not found</li>
+    }
+</ul>
+</div>
